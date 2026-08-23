@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { ArrowRight, Check, MapPin, Instagram, Menu, X } from "lucide-react";
+import { ArrowRight, Check, MapPin, Menu, X } from "lucide-react";
 import { useState } from "react";
 
 export default function HomePage() {
@@ -273,7 +273,7 @@ export default function HomePage() {
               </Link>
               <p className="text-sm font-light text-foreground/60 mb-8">Pune, India</p>
               <div className="flex gap-4">
-                <a href="#" className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-foreground hover:text-background transition-colors"><Instagram className="w-4 h-4" /></a>
+                <a href="#" className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-foreground hover:text-background transition-colors">IN</a>
               </div>
             </div>
             
