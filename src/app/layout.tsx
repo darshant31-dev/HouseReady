@@ -3,8 +3,8 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "HouseReady - Rental Move Management",
-  description: "An end-to-end rental move management platform for Indian renters.",
+  title: "We Make Your House Ready",
+  description: "Ready for whatever comes next. From moving in to moving out, renting, selling or refreshing.",
 };
 
 export default function RootLayout({
