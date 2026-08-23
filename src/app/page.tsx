@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, MapPin, Menu, X, Home } from "lucide-react";
+import { ArrowRight, MapPin, Menu, X, Home, Check } from "lucide-react";
 import { useState, useRef } from "react";
 
 export default function HomePage() {
@@ -18,14 +18,14 @@ export default function HomePage() {
   };
 
   const destinations = [
-    { title: "MOVE IN", desc: "Your new home, ready before you arrive.", color: "from-teal-50 to-emerald-50" },
-    { title: "MOVE OUT", desc: "Leave your rental clean, repaired and ready for handover.", color: "from-orange-50 to-amber-50" },
-    { title: "RENT", desc: "Turn an empty property into a tenant-ready home.", color: "from-blue-50 to-indigo-50" },
-    { title: "SELL", desc: "Make your property clean, presentable and listing-ready.", color: "from-purple-50 to-fuchsia-50" },
-    { title: "HANDOVER", desc: "From possession day to a home you can actually live in.", color: "from-rose-50 to-pink-50" },
-    { title: "REFRESH", desc: "Give your existing home a fresh start.", color: "from-green-50 to-teal-50" },
-    { title: "GUESTS", desc: "Get your home ready before they arrive.", color: "from-yellow-50 to-orange-50" },
-    { title: "PROPERTY CARE", desc: "Someone you trust looking after your property.", color: "from-slate-50 to-gray-50" },
+    { title: "MOVE IN", desc: "Your new home, ready before you arrive.", color: "bg-teal-50 text-teal-900 border-teal-100", icon: <Home className="w-8 h-8 text-teal-600" /> },
+    { title: "MOVE OUT", desc: "Leave your rental clean, repaired and ready.", color: "bg-orange-50 text-orange-900 border-orange-100", icon: <ArrowRight className="w-8 h-8 text-orange-600" /> },
+    { title: "RENT", desc: "Turn an empty property into a tenant-ready home.", color: "bg-blue-50 text-blue-900 border-blue-100", icon: <MapPin className="w-8 h-8 text-blue-600" /> },
+    { title: "SELL", desc: "Make your property clean and listing-ready.", color: "bg-purple-50 text-purple-900 border-purple-100", icon: <Check className="w-8 h-8 text-purple-600" /> },
+    { title: "HANDOVER", desc: "From possession day to a home you can live in.", color: "bg-rose-50 text-rose-900 border-rose-100", icon: <Home className="w-8 h-8 text-rose-600" /> },
+    { title: "REFRESH", desc: "Give your existing home a fresh start.", color: "bg-emerald-50 text-emerald-900 border-emerald-100", icon: <Check className="w-8 h-8 text-emerald-600" /> },
+    { title: "GUESTS", desc: "Get your home ready before they arrive.", color: "bg-yellow-50 text-yellow-900 border-yellow-100", icon: <Home className="w-8 h-8 text-yellow-600" /> },
+    { title: "PROPERTY CARE", desc: "Someone you trust looking after your property.", color: "bg-slate-50 text-slate-900 border-slate-100", icon: <MapPin className="w-8 h-8 text-slate-600" /> },
   ];
 
   const steps = [
@@ -125,24 +125,26 @@ export default function HomePage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {destinations.map((dest, i) => (
-                <motion.div 
-                  key={i}
-                  initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }}
-                  variants={{
-                    hidden: { opacity: 0, y: 30, scale: 0.95 },
-                    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, delay: i * 0.1, ease: "easeOut" } }
-                  }}
-                  className={`group relative h-72 bg-gradient-to-br ${dest.color} rounded-3xl p-8 flex flex-col justify-end overflow-hidden shadow-sm hover:shadow-antigravity hover:-translate-y-2 transition-all duration-500 cursor-pointer border border-white`}
-                >
-                  <div className="absolute inset-0 bg-white/40 group-hover:bg-transparent transition-colors duration-500"></div>
-                  <h3 className="text-2xl font-bold tracking-tight mb-2 group-hover:-translate-y-2 transition-transform duration-500 z-10 text-gray-900">{dest.title}</h3>
-                  <div className="h-0 opacity-0 group-hover:h-auto group-hover:opacity-100 transition-all duration-500 z-10">
-                    <p className="text-sm font-medium text-gray-700 leading-relaxed mb-4">{dest.desc}</p>
-                    <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm text-teal-700 group-hover:scale-110 transition-transform">
-                      <ArrowRight className="w-5 h-5" />
+                <Link href="/planner" key={i}>
+                  <motion.div 
+                    initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }}
+                    variants={{
+                      hidden: { opacity: 0, y: 30, scale: 0.95 },
+                      visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, delay: i * 0.1, ease: "easeOut" } }
+                    }}
+                    className={`group relative h-72 ${dest.color} rounded-[2rem] p-8 flex flex-col justify-between overflow-hidden shadow-sm hover:shadow-antigravity hover:-translate-y-2 transition-all duration-500 cursor-pointer border`}
+                  >
+                    <div className="w-14 h-14 rounded-full bg-white/60 backdrop-blur-md flex items-center justify-center shadow-sm group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
+                      {dest.icon}
                     </div>
-                  </div>
-                </motion.div>
+                    <div>
+                      <h3 className="text-2xl font-bold tracking-tight mb-3 group-hover:translate-x-2 transition-transform duration-500">{dest.title}</h3>
+                      <p className="text-sm font-medium opacity-80 leading-relaxed group-hover:opacity-100 transition-opacity duration-500">
+                        {dest.desc}
+                      </p>
+                    </div>
+                  </motion.div>
+                </Link>
               ))}
             </div>
           </div>
