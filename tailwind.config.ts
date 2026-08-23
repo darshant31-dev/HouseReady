@@ -18,8 +18,9 @@ const config: Config = {
     },
     extend: {
       boxShadow: {
-        'editorial': '0 4px 20px rgba(0, 0, 0, 0.03)',
-        'editorial-hover': '0 10px 40px rgba(0, 0, 0, 0.06)',
+        'antigravity': '0 20px 40px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.02)',
+        'antigravity-hover': '0 30px 60px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.03)',
+        'glow': '0 0 20px rgba(15, 118, 110, 0.3)',
       },
       colors: {
         border: "hsl(var(--border))",

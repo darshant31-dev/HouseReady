@@ -4,37 +4,39 @@
 
 @layer base {
   :root {
-    /* Warm off-white / Soft beige */
-    --background: 40 20% 97%; 
-    /* Deep charcoal */
-    --foreground: 24 10% 10%; 
+    /* Warm off-white - #fcfbf8 */
+    --background: 45 20% 98%; 
+    /* Deep charcoal - #1c1f22 */
+    --foreground: 210 10% 12%; 
     
-    --card: 40 20% 97%;
-    --card-foreground: 24 10% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 210 10% 12%;
     
-    --popover: 40 20% 97%;
-    --popover-foreground: 24 10% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 10% 12%;
     
-    /* Muted earthy green / Sage */
-    --primary: 110 15% 45%; 
-    --primary-foreground: 40 20% 97%;
+    /* Subtle Teal - #0f766e (teal-700) */
+    --primary: 175 75% 26%; 
+    --primary-foreground: 0 0% 100%;
     
+    /* Warm light gray */
     --secondary: 40 10% 90%;
-    --secondary-foreground: 24 10% 10%;
+    --secondary-foreground: 210 10% 12%;
     
-    --muted: 40 10% 92%;
-    --muted-foreground: 24 5% 45%;
+    --muted: 40 10% 94%;
+    --muted-foreground: 210 5% 45%;
     
-    --accent: 110 15% 45%;
-    --accent-foreground: 40 20% 97%;
+    --accent: 175 75% 26%;
+    --accent-foreground: 0 0% 100%;
     
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
     
-    --border: 40 10% 85%;
-    --input: 40 10% 85%;
-    --ring: 110 15% 45%;
-    --radius: 0rem; /* Sharp corners for editorial feel, or 0.25rem for subtle */
+    /* Soft border */
+    --border: 40 10% 88%;
+    --input: 40 10% 88%;
+    --ring: 175 75% 26%;
+    --radius: 1rem; /* Soft rounded corners for Antigravity */
   }
 }
 

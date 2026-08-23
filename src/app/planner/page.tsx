@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ArrowRight, ArrowLeft, Check, CheckCircle2 } from "lucide-react";
+import { ArrowRight, ArrowLeft, Check, CheckCircle2, Home } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function PlannerPage() {
@@ -47,47 +47,63 @@ export default function PlannerPage() {
   };
 
   const slideVariants = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
-    exit: { opacity: 0, y: -20, transition: { duration: 0.3 } }
+    initial: { opacity: 0, y: 30, scale: 0.95 },
+    animate: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
+    exit: { opacity: 0, y: -30, scale: 0.95, transition: { duration: 0.3 } }
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-background text-foreground font-sans">
+    <div className="flex flex-col min-h-screen bg-[#fcfbf8] text-[#1c1f22] font-sans selection:bg-teal-500/20 relative overflow-hidden">
       
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border">
-        <div className="container mx-auto px-6 h-20 flex items-center justify-between">
-          <Link href="/" className="font-medium text-xs sm:text-sm tracking-[0.2em] uppercase">
-            We Make Your House Ready
+      {/* Background Mesh */}
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div className="absolute top-[-10%] right-[-5%] w-[40vw] h-[40vw] rounded-full bg-teal-100 blur-[150px] opacity-60"></div>
+        <div className="absolute bottom-[-10%] left-[-5%] w-[40vw] h-[40vw] rounded-full bg-blue-50 blur-[150px] opacity-60"></div>
+      </div>
+
+      <header className="fixed top-4 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 flex justify-center">
+        <div className="w-full max-w-3xl h-16 rounded-full bg-white/70 backdrop-blur-xl border border-white/50 shadow-sm flex items-center justify-between px-6">
+          <Link href="/" className="font-bold text-xl tracking-tight text-[#1c1f22] flex items-center gap-2">
+            <Home className="h-6 w-6 text-teal-700" />
+            <span className="hidden sm:inline">HouseReady</span>
           </Link>
-          <div className="text-xs tracking-widest text-foreground/50 uppercase font-medium">
-            Step {Math.min(step, 6)} of 6
+          <div className="flex items-center gap-4">
+            <div className="text-sm font-medium text-gray-400">
+              Step {Math.min(step, 6)} / 6
+            </div>
+            <div className="w-24 h-2 bg-gray-100 rounded-full overflow-hidden hidden sm:block">
+              <motion.div 
+                className="h-full bg-teal-500 rounded-full"
+                initial={{ width: 0 }}
+                animate={{ width: `${(Math.min(step, 6) / 6) * 100}%` }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+              />
+            </div>
           </div>
         </div>
       </header>
 
-      <main className="flex-grow flex items-center justify-center p-6 py-32">
-        <div className="w-full max-w-2xl">
+      <main className="flex-grow flex items-center justify-center p-4 py-32 relative z-10">
+        <div className="w-full max-w-xl">
           <AnimatePresence mode="wait">
             
             {step === 1 && (
-              <motion.div key="step1" variants={slideVariants} initial="initial" animate="animate" exit="exit" className="space-y-12">
-                <div>
-                  <span className="text-primary text-xs tracking-widest uppercase block mb-4">Step 01</span>
-                  <h1 className="text-3xl sm:text-5xl font-medium tracking-tight mb-4">What are you getting your house ready for?</h1>
-                  <p className="text-foreground/60 font-light text-lg">Select the primary destination for your property.</p>
+              <motion.div key="step1" variants={slideVariants} initial="initial" animate="animate" exit="exit" className="bg-white/80 backdrop-blur-xl rounded-[2rem] p-8 sm:p-10 shadow-antigravity border border-white">
+                <div className="mb-8">
+                  <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-2">What are you getting your house ready for?</h1>
+                  <p className="text-gray-500 font-medium text-lg">Select the primary destination for your property.</p>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-3">
                   {goals.map((g) => (
                     <button
                       key={g}
                       onClick={() => {
                         setFormData({ ...formData, goal: g, needs: [] });
-                        setTimeout(handleNext, 150);
+                        setTimeout(handleNext, 250);
                       }}
-                      className={`text-left p-6 border transition-all duration-300 ${formData.goal === g ? 'border-primary bg-primary/5' : 'border-border bg-white hover:border-foreground/30'}`}
+                      className={`text-center p-4 rounded-2xl border-2 transition-all duration-300 font-bold ${formData.goal === g ? 'border-teal-500 bg-teal-50 text-teal-900 shadow-sm' : 'border-gray-100 bg-white hover:border-teal-200 hover:bg-gray-50 text-gray-700'}`}
                     >
-                      <span className="text-lg font-medium">{g}</span>
+                      {g}
                     </button>
                   ))}
                 </div>
@@ -95,25 +111,24 @@ export default function PlannerPage() {
             )}
 
             {step === 2 && (
-              <motion.div key="step2" variants={slideVariants} initial="initial" animate="animate" exit="exit" className="space-y-12">
-                <div>
-                  <span className="text-primary text-xs tracking-widest uppercase block mb-4">Step 02</span>
-                  <h1 className="text-3xl sm:text-5xl font-medium tracking-tight mb-4">When do you need it ready?</h1>
-                  <p className="text-foreground/60 font-light text-lg">Select your target deadline.</p>
+              <motion.div key="step2" variants={slideVariants} initial="initial" animate="animate" exit="exit" className="bg-white/80 backdrop-blur-xl rounded-[2rem] p-8 sm:p-10 shadow-antigravity border border-white">
+                <div className="mb-8">
+                  <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-2">When do you need it ready?</h1>
+                  <p className="text-gray-500 font-medium text-lg">Select your target deadline.</p>
                 </div>
                 <div>
                   <Input 
                     type="date" 
-                    className="h-16 text-xl rounded-none border-border bg-white px-6 focus-visible:ring-1 focus-visible:ring-primary focus-visible:border-primary shadow-none"
+                    className="h-16 text-xl rounded-2xl border-gray-200 bg-white px-6 focus-visible:ring-2 focus-visible:ring-teal-500 shadow-sm"
                     value={formData.date}
                     onChange={(e) => setFormData({ ...formData, date: e.target.value })}
                   />
                 </div>
-                <div className="flex justify-between pt-8 border-t border-border">
-                  <Button variant="ghost" onClick={handleBack} className="text-foreground/60 rounded-none uppercase tracking-widest text-xs hover:bg-transparent hover:text-foreground">
+                <div className="flex justify-between pt-8 mt-4">
+                  <Button variant="ghost" onClick={handleBack} className="text-gray-500 rounded-full uppercase tracking-widest text-xs hover:bg-gray-100">
                     <ArrowLeft className="mr-2 h-4 w-4" /> Back
                   </Button>
-                  <Button onClick={handleNext} disabled={!formData.date} className="bg-foreground text-background hover:bg-foreground/90 rounded-none px-8 h-12 uppercase tracking-widest text-xs">
+                  <Button onClick={handleNext} disabled={!formData.date} className="bg-[#1c1f22] text-white hover:bg-gray-800 rounded-full px-8 h-12 font-bold shadow-md">
                     Next <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </div>
@@ -121,27 +136,26 @@ export default function PlannerPage() {
             )}
 
             {step === 3 && (
-              <motion.div key="step3" variants={slideVariants} initial="initial" animate="animate" exit="exit" className="space-y-12">
-                <div>
-                  <span className="text-primary text-xs tracking-widest uppercase block mb-4">Step 03</span>
-                  <h1 className="text-3xl sm:text-5xl font-medium tracking-tight mb-4">What kind of home?</h1>
+              <motion.div key="step3" variants={slideVariants} initial="initial" animate="animate" exit="exit" className="bg-white/80 backdrop-blur-xl rounded-[2rem] p-8 sm:p-10 shadow-antigravity border border-white">
+                <div className="mb-8">
+                  <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-2">What kind of home?</h1>
                 </div>
-                <div className="flex flex-wrap gap-4">
+                <div className="flex flex-wrap gap-3">
                   {sizes.map((s) => (
                     <button
                       key={s}
                       onClick={() => {
                         setFormData({ ...formData, propertySize: s });
-                        setTimeout(handleNext, 150);
+                        setTimeout(handleNext, 250);
                       }}
-                      className={`px-8 py-4 border transition-all duration-300 ${formData.propertySize === s ? 'border-primary bg-primary/5 text-primary' : 'border-border bg-white hover:border-foreground/30'}`}
+                      className={`px-6 py-4 rounded-2xl border-2 transition-all duration-300 font-bold ${formData.propertySize === s ? 'border-teal-500 bg-teal-50 text-teal-900 shadow-sm' : 'border-gray-100 bg-white hover:border-teal-200 hover:bg-gray-50 text-gray-700'}`}
                     >
-                      <span className="text-sm font-medium tracking-wide uppercase">{s}</span>
+                      {s}
                     </button>
                   ))}
                 </div>
-                <div className="flex justify-between pt-8 border-t border-border mt-8">
-                  <Button variant="ghost" onClick={handleBack} className="text-foreground/60 rounded-none uppercase tracking-widest text-xs hover:bg-transparent hover:text-foreground">
+                <div className="flex justify-between pt-8 mt-4">
+                  <Button variant="ghost" onClick={handleBack} className="text-gray-500 rounded-full uppercase tracking-widest text-xs hover:bg-gray-100">
                     <ArrowLeft className="mr-2 h-4 w-4" /> Back
                   </Button>
                 </div>
@@ -149,34 +163,33 @@ export default function PlannerPage() {
             )}
 
             {step === 4 && (
-              <motion.div key="step4" variants={slideVariants} initial="initial" animate="animate" exit="exit" className="space-y-12">
-                <div>
-                  <span className="text-primary text-xs tracking-widest uppercase block mb-4">Step 04</span>
-                  <h1 className="text-3xl sm:text-5xl font-medium tracking-tight mb-4">Where is it?</h1>
+              <motion.div key="step4" variants={slideVariants} initial="initial" animate="animate" exit="exit" className="bg-white/80 backdrop-blur-xl rounded-[2rem] p-8 sm:p-10 shadow-antigravity border border-white">
+                <div className="mb-8">
+                  <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-2">Where is it?</h1>
                 </div>
-                <div className="space-y-6">
+                <div className="space-y-5">
                   <div>
-                    <label className="text-xs uppercase tracking-widest font-medium text-foreground/50 block mb-3">City</label>
+                    <label className="text-sm font-bold text-gray-700 block mb-2">City</label>
                     <Input 
                       value={formData.location}
                       disabled
-                      className="h-16 text-lg rounded-none border-border bg-foreground/5 px-6 shadow-none cursor-not-allowed"
+                      className="h-16 text-lg rounded-2xl border-gray-200 bg-gray-50 px-6 cursor-not-allowed text-gray-500 font-bold"
                     />
                   </div>
                   <div>
-                    <label className="text-xs uppercase tracking-widest font-medium text-foreground/50 block mb-3">Locality (Pune)</label>
+                    <label className="text-sm font-bold text-gray-700 block mb-2">Locality (Pune)</label>
                     <Input 
                       placeholder="e.g. Wakad, Baner"
                       autoFocus
-                      className="h-16 text-lg rounded-none border-border bg-white px-6 focus-visible:ring-1 focus-visible:ring-primary focus-visible:border-primary shadow-none"
+                      className="h-16 text-lg rounded-2xl border-gray-200 bg-white px-6 focus-visible:ring-2 focus-visible:ring-teal-500 shadow-sm font-bold"
                     />
                   </div>
                 </div>
-                <div className="flex justify-between pt-8 border-t border-border">
-                  <Button variant="ghost" onClick={handleBack} className="text-foreground/60 rounded-none uppercase tracking-widest text-xs hover:bg-transparent hover:text-foreground">
+                <div className="flex justify-between pt-8 mt-4">
+                  <Button variant="ghost" onClick={handleBack} className="text-gray-500 rounded-full uppercase tracking-widest text-xs hover:bg-gray-100">
                     <ArrowLeft className="mr-2 h-4 w-4" /> Back
                   </Button>
-                  <Button onClick={handleNext} className="bg-foreground text-background hover:bg-foreground/90 rounded-none px-8 h-12 uppercase tracking-widest text-xs">
+                  <Button onClick={handleNext} className="bg-[#1c1f22] text-white hover:bg-gray-800 rounded-full px-8 h-12 font-bold shadow-md">
                     Next <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </div>
@@ -184,31 +197,30 @@ export default function PlannerPage() {
             )}
 
             {step === 5 && (
-              <motion.div key="step5" variants={slideVariants} initial="initial" animate="animate" exit="exit" className="space-y-12">
-                <div>
-                  <span className="text-primary text-xs tracking-widest uppercase block mb-4">Step 05</span>
-                  <h1 className="text-3xl sm:text-5xl font-medium tracking-tight mb-4">What do you think you need?</h1>
-                  <p className="text-foreground/60 font-light text-lg">Select what you think needs to be done to get it {formData.goal} ready. (We'll finalize this during planning).</p>
+              <motion.div key="step5" variants={slideVariants} initial="initial" animate="animate" exit="exit" className="bg-white/80 backdrop-blur-xl rounded-[2rem] p-8 sm:p-10 shadow-antigravity border border-white">
+                <div className="mb-8">
+                  <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-2">What do you think you need?</h1>
+                  <p className="text-gray-500 font-medium text-lg">Select what you think needs to be done. We'll finalize this during our consultation.</p>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {getAvailableNeeds().map((need) => (
                     <button
                       key={need}
                       onClick={() => toggleNeed(need)}
-                      className={`text-left p-4 border flex items-center justify-between transition-all duration-300 ${formData.needs.includes(need) ? 'border-primary bg-primary/5' : 'border-border bg-white hover:border-foreground/30'}`}
+                      className={`text-left p-4 rounded-2xl border-2 flex items-center justify-between transition-all duration-300 font-bold ${formData.needs.includes(need) ? 'border-teal-500 bg-teal-50 text-teal-900 shadow-sm' : 'border-gray-100 bg-white hover:border-teal-200 hover:bg-gray-50 text-gray-700'}`}
                     >
-                      <span className="text-sm font-medium tracking-wide">{need}</span>
-                      <div className={`w-5 h-5 border rounded-sm flex items-center justify-center ${formData.needs.includes(need) ? 'bg-primary border-primary text-white' : 'border-border'}`}>
-                        {formData.needs.includes(need) && <Check className="w-3 h-3" />}
+                      <span>{need}</span>
+                      <div className={`w-6 h-6 rounded-full flex items-center justify-center transition-colors ${formData.needs.includes(need) ? 'bg-teal-500 text-white' : 'bg-gray-100'}`}>
+                        {formData.needs.includes(need) && <Check className="w-4 h-4" />}
                       </div>
                     </button>
                   ))}
                 </div>
-                <div className="flex justify-between pt-8 border-t border-border">
-                  <Button variant="ghost" onClick={handleBack} className="text-foreground/60 rounded-none uppercase tracking-widest text-xs hover:bg-transparent hover:text-foreground">
+                <div className="flex justify-between pt-8 mt-4">
+                  <Button variant="ghost" onClick={handleBack} className="text-gray-500 rounded-full uppercase tracking-widest text-xs hover:bg-gray-100">
                     <ArrowLeft className="mr-2 h-4 w-4" /> Back
                   </Button>
-                  <Button onClick={handleNext} className="bg-foreground text-background hover:bg-foreground/90 rounded-none px-8 h-12 uppercase tracking-widest text-xs">
+                  <Button onClick={handleNext} className="bg-[#1c1f22] text-white hover:bg-gray-800 rounded-full px-8 h-12 font-bold shadow-md">
                     Build My Ready Plan <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </div>
@@ -216,37 +228,36 @@ export default function PlannerPage() {
             )}
 
             {step === 6 && (
-              <motion.div key="step6" variants={slideVariants} initial="initial" animate="animate" exit="exit" className="space-y-12">
-                <div>
-                  <span className="text-primary text-xs tracking-widest uppercase block mb-4">Almost There</span>
-                  <h1 className="text-3xl sm:text-5xl font-medium tracking-tight mb-4">Where should we send your plan?</h1>
+              <motion.div key="step6" variants={slideVariants} initial="initial" animate="animate" exit="exit" className="bg-white/80 backdrop-blur-xl rounded-[2rem] p-8 sm:p-10 shadow-antigravity border border-white">
+                <div className="mb-8">
+                  <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-2">Where should we send your plan?</h1>
                 </div>
-                <div className="space-y-6">
+                <div className="space-y-5">
                   <div>
-                    <label className="text-xs uppercase tracking-widest font-medium text-foreground/50 block mb-3">Name</label>
+                    <label className="text-sm font-bold text-gray-700 block mb-2">Name</label>
                     <Input 
                       placeholder="Your name"
-                      className="h-16 text-lg rounded-none border-border bg-white px-6 focus-visible:ring-1 focus-visible:ring-primary focus-visible:border-primary shadow-none"
+                      className="h-16 text-lg rounded-2xl border-gray-200 bg-white px-6 focus-visible:ring-2 focus-visible:ring-teal-500 shadow-sm font-bold"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     />
                   </div>
                   <div>
-                    <label className="text-xs uppercase tracking-widest font-medium text-foreground/50 block mb-3">WhatsApp Number</label>
+                    <label className="text-sm font-bold text-gray-700 block mb-2">WhatsApp Number</label>
                     <Input 
                       type="tel"
                       placeholder="+91"
-                      className="h-16 text-lg rounded-none border-border bg-white px-6 focus-visible:ring-1 focus-visible:ring-primary focus-visible:border-primary shadow-none"
+                      className="h-16 text-lg rounded-2xl border-gray-200 bg-white px-6 focus-visible:ring-2 focus-visible:ring-teal-500 shadow-sm font-bold"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     />
                   </div>
                 </div>
-                <div className="flex justify-between pt-8 border-t border-border">
-                  <Button variant="ghost" onClick={handleBack} className="text-foreground/60 rounded-none uppercase tracking-widest text-xs hover:bg-transparent hover:text-foreground">
+                <div className="flex justify-between pt-8 mt-4">
+                  <Button variant="ghost" onClick={handleBack} className="text-gray-500 rounded-full uppercase tracking-widest text-xs hover:bg-gray-100">
                     <ArrowLeft className="mr-2 h-4 w-4" /> Back
                   </Button>
-                  <Button onClick={handleNext} disabled={!formData.name || !formData.phone} className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-none px-8 h-12 uppercase tracking-widest text-xs">
+                  <Button onClick={handleNext} disabled={!formData.name || !formData.phone} className="bg-teal-700 hover:bg-teal-800 text-white rounded-full px-8 h-12 font-bold shadow-glow">
                     View My Ready Plan
                   </Button>
                 </div>
@@ -254,49 +265,55 @@ export default function PlannerPage() {
             )}
 
             {step === 7 && (
-              <motion.div key="step7" variants={slideVariants} initial="initial" animate="animate" exit="exit" className="space-y-12">
+              <motion.div key="step7" variants={slideVariants} initial="initial" animate="animate" exit="exit">
                 
                 {/* The "Receipt" / Ready Plan */}
-                <div className="bg-white border border-border p-8 sm:p-12 shadow-editorial max-w-xl mx-auto relative">
-                  <div className="absolute top-0 left-0 w-full h-1 bg-primary"></div>
+                <div className="bg-white/90 backdrop-blur-2xl border border-white p-8 sm:p-12 rounded-[3rem] shadow-antigravity text-center relative overflow-hidden">
+                  <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-teal-400 to-teal-600"></div>
                   
-                  <div className="text-center mb-10">
-                    <h2 className="text-xs tracking-[0.3em] text-foreground/50 uppercase mb-4">Your Home Ready Plan</h2>
-                    <h3 className="text-3xl font-medium tracking-tight">{formData.goal}</h3>
-                    <p className="text-sm text-foreground/60 mt-2">{formData.propertySize} • Pune • By {formData.date}</p>
-                  </div>
+                  <motion.div 
+                    initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", bounce: 0.5, delay: 0.2 }}
+                    className="mx-auto w-20 h-20 bg-teal-50 rounded-full flex items-center justify-center mb-6 shadow-sm border border-teal-100"
+                  >
+                    <CheckCircle2 className="h-10 w-10 text-teal-600" />
+                  </motion.div>
 
                   <div className="mb-10">
-                    <h4 className="text-xs tracking-widest uppercase font-medium text-foreground/50 mb-6">Recommended Scope</h4>
+                    <h3 className="text-3xl font-bold tracking-tight mb-2 text-gray-900">{formData.goal} Plan</h3>
+                    <p className="text-base font-medium text-gray-500">{formData.propertySize} • Pune • By {formData.date}</p>
+                  </div>
+
+                  <div className="bg-gray-50 rounded-3xl p-8 text-left mb-10 border border-gray-100 shadow-sm">
+                    <h4 className="text-sm font-bold text-gray-800 mb-6 uppercase tracking-wider">Recommended Scope</h4>
                     <ul className="space-y-4">
                       {formData.needs.length > 0 ? formData.needs.map(need => (
                         <li key={need} className="flex items-start gap-4">
-                          <CheckCircle2 className="w-5 h-5 text-primary shrink-0" />
-                          <span className="text-foreground/80 font-light">{need}</span>
+                          <CheckCircle2 className="w-6 h-6 text-teal-500 shrink-0" />
+                          <span className="text-gray-700 font-bold">{need}</span>
                         </li>
                       )) : (
                         <li className="flex items-start gap-4">
-                          <CheckCircle2 className="w-5 h-5 text-primary shrink-0" />
-                          <span className="text-foreground/80 font-light">Full {formData.goal} Coordination Package</span>
+                          <CheckCircle2 className="w-6 h-6 text-teal-500 shrink-0" />
+                          <span className="text-gray-700 font-bold">Full {formData.goal} Coordination Package</span>
                         </li>
                       )}
                     </ul>
                   </div>
 
-                  <div className="border-t border-border pt-8 mb-10">
-                    <h4 className="text-xs tracking-widest uppercase font-medium text-foreground/50 mb-2">Estimated Range</h4>
-                    <div className="text-4xl font-medium tracking-tight">₹8,500 – ₹14,000</div>
-                    <p className="text-xs text-foreground/40 mt-3 font-light leading-relaxed">
-                      Indicative estimate — final quote depends on property condition, specific requirements, and exact scope defined during our consultation.
+                  <div className="mb-10">
+                    <h4 className="text-sm font-bold text-gray-500 mb-2 uppercase tracking-wider">Estimated Range</h4>
+                    <div className="text-5xl font-bold tracking-tighter text-teal-700">₹8,500 – ₹14,000</div>
+                    <p className="text-sm text-gray-500 mt-4 font-medium leading-relaxed max-w-sm mx-auto">
+                      Indicative estimate — final quote depends on property condition and exact scope defined during our consultation.
                     </p>
                   </div>
                   
                   <div className="space-y-4">
-                    <Button className="w-full bg-foreground text-background hover:bg-foreground/90 rounded-none h-14 uppercase tracking-widest text-xs font-medium">
+                    <Button className="w-full bg-[#1c1f22] text-white hover:bg-gray-800 rounded-full h-16 font-bold text-lg shadow-antigravity hover:-translate-y-1 transition-all">
                       Book My Ready Plan
                     </Button>
                     <Link href={`https://wa.me/919000000000?text=Hi, I want to book my ${formData.goal} Ready Plan for a ${formData.propertySize} in Pune by ${formData.date}.`} target="_blank" className="block w-full">
-                      <Button variant="outline" className="w-full border-border text-foreground hover:bg-background rounded-none h-14 uppercase tracking-widest text-xs font-medium">
+                      <Button variant="outline" className="w-full border-2 border-teal-700 text-teal-700 hover:bg-teal-50 rounded-full h-16 font-bold text-lg transition-all">
                         Talk to a Home Advisor
                       </Button>
                     </Link>
