@@ -113,20 +113,7 @@ export default function HomePage() {
                 </div>
                 <h1 className="text-5xl md:text-7xl lg:text-[90px] leading-[0.95] font-bold tracking-tighter mb-8 text-[#1c1f22]">
                   WE MAKE <br/>
-                  YOUR <span className="inline-block relative w-[250px] md:w-[350px] h-[1em] text-teal-700">
-                    <AnimatePresence mode="popLayout">
-                      <motion.span
-                        key={currentWord}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        transition={{ duration: 0.4, ease: "easeInOut" }}
-                        className="absolute left-0"
-                      >
-                        {words[currentWord]}
-                      </motion.span>
-                    </AnimatePresence>
-                  </span><br/>
+                  YOUR HOUSE <br/>
                   READY.
                 </h1>
                 <p className="text-xl md:text-2xl font-medium text-gray-500 max-w-xl mb-12 leading-relaxed">
@@ -348,8 +335,10 @@ export default function HomePage() {
         <section className="py-24 px-6 lg:px-12 relative z-20">
           <div className="container mx-auto">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Why HouseReady?</h2>
-              <p className="text-xl text-gray-500 font-medium">The difference between managing vendors and buying an outcome.</p>
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">ONE HOUSE. MULTIPLE TASKS. ONE TEAM.</h2>
+              <p className="text-xl text-gray-500 font-medium max-w-2xl mx-auto">
+                You shouldn't have to find, call, schedule and follow up with five different vendors. You tell us what needs to be ready. We coordinate the rest.
+              </p>
             </motion.div>
 
             <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
@@ -372,7 +361,7 @@ export default function HomePage() {
                 <h3 className="text-xl font-bold text-teal-200 mb-8 uppercase tracking-widest relative z-10">HouseReady</h3>
                 <p className="text-2xl font-bold mb-8 relative z-10">Tell us what needs to be ready. We handle the rest.</p>
                 <ul className="space-y-6 relative z-10">
-                  {["Plan", "Coordinate", "Schedule", "Track", "Resolve", "Complete"].map((item, i) => (
+                  {["Plan", "Coordinate", "Execute", "Check", "Ready"].map((item, i) => (
                     <li key={i} className="flex items-center gap-4 font-bold text-lg">
                       <CheckCircle2 className="w-6 h-6 text-teal-400" />
                       {item}

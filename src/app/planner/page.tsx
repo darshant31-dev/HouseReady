@@ -20,12 +20,66 @@ const goals = [
 
 const getServicesForGoal = (goal: string) => {
   switch(goal) {
-    case "Move In": return ["Deep Cleaning", "Pest Control", "Electrical checks", "Plumbing checks", "Appliance Installation", "Furniture Assembly", "Curtains / Blinds"];
-    case "Move Out": return ["Deep Cleaning", "Painting / Touch-ups", "Repairs", "Appliance Removal", "Furniture Dismantling", "Disposal"];
-    case "Rent": return ["Deep Cleaning", "Painting", "Repairs", "Pest Control", "Fixtures", "Photography", "Listing Preparation"];
-    case "Sell": return ["Decluttering", "Deep Cleaning", "Repairs", "Painting", "Lighting", "Fixtures", "Photography"];
-    case "Refresh": return ["Painting", "Lighting", "Carpentry", "Plumbing", "Deep Cleaning", "Fixtures"];
-    default: return ["Deep Cleaning", "Pest Control", "General Repairs", "Painting", "Appliance Setup", "Plumbing"];
+    case "Move In": return [
+      { name: "Deep Cleaning", reason: "Essential for a hygienic start in a new space." },
+      { name: "Pest Control", reason: "Crucial before bringing in food and furniture." },
+      { name: "Electrical checks", reason: "Ensure all switches and sockets are safe." },
+      { name: "Plumbing checks", reason: "Fix any hidden leaks before you move." },
+      { name: "Appliance Installation", reason: "Get your fridge and washing machine running on day 1." },
+      { name: "Furniture Assembly", reason: "Sleep in your own bed on your first night." },
+      { name: "Curtains / Blinds", reason: "Immediate privacy and light control." }
+    ];
+    case "Move Out": return [
+      { name: "Deep Cleaning", reason: "Required to ensure full deposit return." },
+      { name: "Painting / Touch-ups", reason: "Cover up scuffs and picture-frame holes." },
+      { name: "Repairs", reason: "Fix minor damages caused during tenancy." },
+      { name: "Appliance Removal", reason: "Safely disconnect heavy appliances." },
+      { name: "Furniture Dismantling", reason: "Prepare bulky items for the movers." },
+      { name: "Disposal", reason: "Get rid of unwanted items responsibly." }
+    ];
+    case "Rent": return [
+      { name: "Deep Cleaning", reason: "Make the property highly attractive to prospects." },
+      { name: "Painting", reason: "A fresh coat increases rental value." },
+      { name: "Repairs", reason: "Ensure everything works for the new tenant." },
+      { name: "Pest Control", reason: "A baseline requirement for a premium rental." },
+      { name: "Fixtures", reason: "Replace broken handles and switches." },
+      { name: "Photography", reason: "Stand out on listing platforms." },
+      { name: "Listing Preparation", reason: "We prepare the property for immediate viewing." }
+    ];
+    case "Sell": return [
+      { name: "Decluttering", reason: "Make the space look larger to buyers." },
+      { name: "Deep Cleaning", reason: "Create a flawless first impression." },
+      { name: "Repairs", reason: "Fix issues that might lower your valuation." },
+      { name: "Painting", reason: "Neutral colors help buyers visualize living there." },
+      { name: "Lighting", reason: "Brighten the space for viewings." },
+      { name: "Fixtures", reason: "Modernize small details for higher ROI." },
+      { name: "Staging", reason: "Furnish the home to sell it faster." },
+      { name: "Photography", reason: "Essential for premium property listings." }
+    ];
+    case "Handover": return [
+      { name: "Snag Inspection", reason: "Identify builder defects before signing." },
+      { name: "Condition Documentation", reason: "Record the exact state of the property." },
+      { name: "Cleaning", reason: "Remove construction dust and debris." },
+      { name: "Installation", reason: "Install basic necessary fixtures." }
+    ];
+    case "Refresh": return [
+      { name: "Painting", reason: "The fastest way to revitalize a room." },
+      { name: "Lighting", reason: "Upgrade to modern, warm illumination." },
+      { name: "Carpentry", reason: "Fix squeaky doors or broken cabinets." },
+      { name: "Plumbing", reason: "Resolve annoying minor leaks." },
+      { name: "Deep Cleaning", reason: "A full reset for your living space." }
+    ];
+    case "Guests": return [
+      { name: "Deep Cleaning", reason: "Ensure the house is spotless for arrivals." },
+      { name: "Kitchen / Bathroom", reason: "The most important areas for guests." },
+      { name: "Linen coordination", reason: "Fresh bedding and towels prepared." },
+      { name: "Setup", reason: "Arrange the guest room perfectly." }
+    ];
+    default: return [
+      { name: "Deep Cleaning", reason: "A baseline for any home preparation." },
+      { name: "Pest Control", reason: "Preventative care for peace of mind." },
+      { name: "General Repairs", reason: "Fix pending minor issues." }
+    ];
   }
 };
 
@@ -298,19 +352,22 @@ function PlannerContent() {
                   <p className="text-gray-500 font-medium text-lg">Based on your goal ({formData.goal}), we recommend these services.</p>
                 </div>
                 <div className="grid sm:grid-cols-2 gap-4">
-                  {getServicesForGoal(formData.goal || "Move In").map((service) => (
+                  {getServicesForGoal(formData.goal || "Move In").map((serviceObj) => (
                     <button
-                      key={service}
+                      key={serviceObj.name}
                       onClick={() => {
-                        const newNeeds = formData.needs.includes(service)
-                          ? formData.needs.filter(n => n !== service)
-                          : [...formData.needs, service];
+                        const newNeeds = formData.needs.includes(serviceObj.name)
+                          ? formData.needs.filter(n => n !== serviceObj.name)
+                          : [...formData.needs, serviceObj.name];
                         setFormData({ ...formData, needs: newNeeds });
                       }}
-                      className={`h-16 px-6 rounded-2xl flex items-center justify-between font-bold border-2 transition-all hover:-translate-y-1 ${formData.needs.includes(service) ? 'border-teal-500 bg-teal-50 text-teal-900 shadow-sm' : 'border-gray-100 bg-white hover:border-teal-200 hover:bg-teal-50/50'}`}
+                      className={`p-4 rounded-2xl flex items-center justify-between font-bold border-2 transition-all text-left group hover:-translate-y-1 ${formData.needs.includes(serviceObj.name) ? 'border-teal-500 bg-teal-50 text-teal-900 shadow-sm' : 'border-gray-100 bg-white hover:border-teal-200 hover:bg-teal-50/50'}`}
                     >
-                      {service}
-                      {formData.needs.includes(service) && <CheckCircle2 className="w-5 h-5 text-teal-500" />}
+                      <div>
+                        <div className="text-lg">{serviceObj.name}</div>
+                        <div className={`text-xs font-medium mt-1 ${formData.needs.includes(serviceObj.name) ? 'text-teal-700' : 'text-gray-400 group-hover:text-teal-600'}`}>{serviceObj.reason}</div>
+                      </div>
+                      {formData.needs.includes(serviceObj.name) && <CheckCircle2 className="w-6 h-6 text-teal-500 shrink-0 ml-4" />}
                     </button>
                   ))}
                 </div>
@@ -370,13 +427,19 @@ function PlannerContent() {
                     <div className="absolute top-6 right-6 bg-teal-500 text-white text-[10px] font-bold uppercase tracking-widest py-1 px-3 rounded-full">Recommended</div>
                     <h3 className="text-2xl font-bold mb-2">Comfort</h3>
                     <p className="text-sm text-teal-200 mb-6 font-medium">The recommended HouseReady package.</p>
-                    <ul className="space-y-3 mb-8 flex-grow relative z-10">
-                      {formData.needs.map((need, i) => (
-                         <li key={i} className="flex items-start gap-3">
-                           <CheckCircle2 className="w-5 h-5 text-teal-400 shrink-0" />
-                           <span className="text-white text-sm font-medium leading-tight">{need}</span>
-                         </li>
-                      ))}
+                    <ul className="space-y-4 mb-8 flex-grow relative z-10">
+                      {formData.needs.map((need, i) => {
+                         const serviceObj = getServicesForGoal(formData.goal).find(s => s.name === need);
+                         return (
+                           <li key={i} className="flex items-start gap-3">
+                             <CheckCircle2 className="w-5 h-5 text-teal-400 shrink-0 mt-0.5" />
+                             <div>
+                               <div className="text-white text-sm font-bold leading-tight">{need}</div>
+                               {serviceObj && <div className="text-teal-300 text-xs mt-1 font-medium leading-snug">{serviceObj.reason}</div>}
+                             </div>
+                           </li>
+                         );
+                      })}
                     </ul>
                     <div className="pt-6 border-t border-teal-800 relative z-10 mt-auto">
                       <div className="text-xs text-teal-400 font-bold uppercase mb-1 tracking-widest">Indicative starting from</div>

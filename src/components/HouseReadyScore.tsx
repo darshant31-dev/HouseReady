@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ArrowRight, CheckCircle2, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export function HouseReadyScore() {
   const [step, setStep] = useState(0);
@@ -33,13 +34,16 @@ export function HouseReadyScore() {
           {score > 80 ? "Your house is almost ready." : "Your house needs some work."}
         </p>
         <div className="max-w-md mx-auto space-y-4 mb-8 text-left bg-white/5 p-6 rounded-2xl">
-          <p className="text-sm text-gray-400 font-bold uppercase">We found issues to fix:</p>
-          <div className="flex items-center gap-3"><AlertCircle className="w-5 h-5 text-orange-400" /> Deep cleaning required</div>
-          <div className="flex items-center gap-3"><AlertCircle className="w-5 h-5 text-orange-400" /> Plumbing & electrical checks</div>
+          <p className="text-sm text-gray-400 font-bold uppercase tracking-widest">3 THINGS TO FIX:</p>
+          <div className="flex items-center gap-3"><AlertCircle className="w-5 h-5 text-orange-400" /> Bathroom cleaning</div>
+          <div className="flex items-center gap-3"><AlertCircle className="w-5 h-5 text-orange-400" /> Wall touch-up</div>
+          <div className="flex items-center gap-3"><AlertCircle className="w-5 h-5 text-orange-400" /> Pest treatment</div>
         </div>
-        <Button className="bg-white text-[#1c1f22] hover:bg-gray-100 rounded-full h-14 px-10 font-bold shadow-glow">
-          Fix These For Me <ArrowRight className="w-5 h-5 ml-2" />
-        </Button>
+        <Link href="/planner">
+          <Button className="bg-white text-[#1c1f22] hover:bg-gray-100 rounded-full h-14 px-10 font-bold shadow-glow uppercase tracking-wide">
+            MAKE MY HOUSE READY <ArrowRight className="w-5 h-5 ml-2" />
+          </Button>
+        </Link>
       </div>
     );
   }
