@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { ArrowRight, MapPin, Menu, X, Home, Check, CheckCircle2, Sparkles, Wrench, PackageOpen, PaintRoller, Camera } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
-import { BeforeAfterSlider } from "@/components/BeforeAfterSlider";
+import { TransformationStories } from "@/components/TransformationStories";
 import { PriceEstimator } from "@/components/PriceEstimator";
 import { HouseReadyScore } from "@/components/HouseReadyScore";
 
@@ -137,7 +137,7 @@ export default function HomePage() {
               </motion.div>
               
               <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1, delay: 0.2 }} className="hidden lg:block relative h-[70vh] w-full rounded-[3rem] overflow-hidden shadow-antigravity">
-                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075&auto=format&fit=crop')] bg-cover bg-center"></div>
+                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center"></div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
                 <div className="absolute bottom-8 left-8 right-8 bg-white/20 backdrop-blur-xl border border-white/40 p-6 rounded-3xl text-white">
                   <div className="font-bold tracking-widest text-xs uppercase mb-2 opacity-80">Recent Project</div>
@@ -318,15 +318,15 @@ export default function HomePage() {
         {/* BEFORE / AFTER */}
         <section className="py-24 px-6 lg:px-12 bg-white relative z-20 border-y border-gray-100 overflow-hidden">
           <div className="container mx-auto">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="mb-16 text-center">
-              <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">From empty to ready.</h2>
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="mb-12 text-center">
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Real HouseReady Transformations.</h2>
               <p className="text-xl text-gray-500 font-medium max-w-2xl mx-auto">
-                See the difference a coordinated HouseReady plan makes.
+                See exactly what it takes to get a home ready for its next chapter.
               </p>
             </motion.div>
             
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-              <BeforeAfterSlider beforeLabel="Empty & Unprepared" afterLabel="Move-In Ready" />
+              <TransformationStories />
             </motion.div>
           </div>
         </section>
