@@ -7,6 +7,7 @@ import { ArrowRight, MapPin, Menu, X, Home, Check, CheckCircle2, Sparkles, Wrenc
 import { useState, useRef, useEffect } from "react";
 import { BeforeAfterSlider } from "@/components/BeforeAfterSlider";
 import { PriceEstimator } from "@/components/PriceEstimator";
+import { HouseReadyScore } from "@/components/HouseReadyScore";
 
 export default function HomePage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -129,18 +130,23 @@ export default function HomePage() {
                   READY.
                 </h1>
                 <p className="text-xl md:text-2xl font-medium text-gray-500 max-w-xl mb-12 leading-relaxed">
-                  Moving in, moving out, renting, selling or simply refreshing your home — we coordinate everything needed to get your house ready.
+                  Moving in, moving out, renting, selling or simply refreshing your home — HouseReady coordinates everything needed to get it ready.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex flex-col sm:flex-row gap-4 mb-4">
                   <Link href="/planner">
                     <Button className="bg-[#1c1f22] hover:bg-gray-800 text-white rounded-full px-10 h-16 text-lg font-bold shadow-antigravity hover:shadow-antigravity-hover hover:-translate-y-1 transition-all w-full sm:w-auto group">
                       Get My House Ready <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </Link>
-                  <p className="text-sm text-gray-400 font-medium text-center sm:text-left sm:ml-4 flex items-center">
-                    Get your personalised plan in 60s
-                  </p>
+                  <Link href="#how-it-works">
+                    <Button variant="outline" className="border-gray-300 text-gray-700 bg-white/50 hover:bg-white backdrop-blur rounded-full px-10 h-16 text-lg font-bold transition-all w-full sm:w-auto">
+                      See How It Works
+                    </Button>
+                  </Link>
                 </div>
+                <p className="text-sm text-gray-400 font-medium text-center sm:text-left sm:ml-4">
+                  Build your personalised plan in about 60 seconds.
+                </p>
               </motion.div>
               
               <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1, delay: 0.2 }} className="hidden lg:block relative h-[70vh] w-full rounded-[3rem] overflow-hidden shadow-antigravity">
@@ -193,8 +199,8 @@ export default function HomePage() {
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="mt-16 bg-[#1c1f22] text-white rounded-[2rem] p-8 sm:p-12 flex flex-col md:flex-row items-center justify-between gap-8 shadow-antigravity relative overflow-hidden">
                <div className="absolute right-0 top-0 w-64 h-64 bg-teal-500/20 blur-[80px] rounded-full"></div>
                <div className="relative z-10 max-w-xl">
-                 <h3 className="text-2xl sm:text-3xl font-bold mb-3">Not sure what you need?</h3>
-                 <p className="text-gray-400 font-medium text-lg">That's okay. Tell us what's happening with the property and we'll figure out the rest.</p>
+                 <h3 className="text-2xl sm:text-3xl font-bold mb-3">You don't need to know what services you need.</h3>
+                 <p className="text-gray-400 font-medium text-lg">Just tell us what's happening. We'll figure out the rest.</p>
                </div>
                <Link href="/planner" className="relative z-10 w-full md:w-auto">
                  <Button className="w-full md:w-auto bg-white text-gray-900 hover:bg-gray-100 rounded-full h-14 px-8 font-bold text-lg shadow-glow">
@@ -310,6 +316,15 @@ export default function HomePage() {
                 </motion.div>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* HOUSE READY SCORE */}
+        <section className="py-24 px-6 lg:px-12 relative z-20 bg-gray-50 border-t border-gray-200">
+          <div className="container mx-auto max-w-4xl">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+              <HouseReadyScore />
+            </motion.div>
           </div>
         </section>
 
@@ -454,8 +469,56 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* PUNE LAUNCH */}
+        {/* WHAT HAPPENS AFTER I BOOK? */}
+        <section className="py-24 px-6 lg:px-12 relative z-20 bg-gray-50 border-t border-gray-200">
+          <div className="container mx-auto max-w-5xl">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-16">
+              <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">What happens after you book?</h2>
+              <p className="text-xl text-gray-500 font-medium">A completely managed process, from quote to handover.</p>
+            </motion.div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {[
+                { step: "01", title: "Tell us what you need.", desc: "Use the planner to build your scope." },
+                { step: "02", title: "We confirm the scope.", desc: "An expert finalizes details with you." },
+                { step: "03", title: "You receive the final quote.", desc: "Transparent, upfront pricing." },
+                { step: "04", title: "Services are scheduled.", desc: "We coordinate our vetted partners." },
+                { step: "05", title: "Work is completed.", desc: "Follow progress on your dashboard." },
+                { step: "06", title: "HouseReady checks the job.", desc: "We verify the quality standard." },
+                { step: "07", title: "Your house is ready.", desc: "On time and hassle-free." }
+              ].map((s, i) => (
+                <div key={i} className="p-6 rounded-[2rem] bg-white shadow-sm border border-gray-100 hover:shadow-md transition-all">
+                  <div className="text-teal-600/30 font-black text-4xl mb-4">{s.step}</div>
+                  <h4 className="font-bold text-lg mb-2 leading-tight">{s.title}</h4>
+                  <p className="text-gray-500 text-sm font-medium">{s.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* SINGLE SERVICE OPTION */}
         <section className="py-24 px-6 lg:px-12 relative z-20">
+          <div className="container mx-auto max-w-4xl text-center">
+             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="bg-white rounded-[3rem] p-12 border border-gray-200 shadow-sm">
+                <h3 className="text-sm font-bold text-gray-400 mb-4 uppercase tracking-widest">I KNOW WHAT I NEED</h3>
+                <h2 className="text-3xl font-bold tracking-tight mb-6">Just want one or two services?</h2>
+                <div className="flex flex-wrap justify-center gap-3 mb-10 max-w-2xl mx-auto">
+                  {['Cleaning', 'Painting', 'Pest Control', 'Plumbing', 'Electrical', 'Carpentry', 'Moving', 'Installation', 'Other'].map(s => (
+                    <div key={s} className="px-5 py-2.5 rounded-full bg-gray-50 border border-gray-200 font-medium text-gray-600">{s}</div>
+                  ))}
+                </div>
+                <Link href="/planner?goal=Single">
+                  <Button variant="outline" className="rounded-full px-8 h-14 font-bold border-gray-300 text-gray-700 hover:bg-gray-50">
+                    Get An Estimate <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                </Link>
+             </motion.div>
+          </div>
+        </section>
+
+        {/* PUNE LAUNCH */}
+        <section className="py-24 px-6 lg:px-12 relative z-20 bg-white">
           <div className="container mx-auto max-w-4xl">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="bg-gradient-to-br from-teal-50 to-teal-100/50 rounded-[3rem] p-10 md:p-16 border border-teal-100 flex flex-col md:flex-row items-center justify-between gap-12 text-center md:text-left">
               <div className="md:w-1/2">
@@ -478,6 +541,42 @@ export default function HomePage() {
                  </div>
               </div>
             </motion.div>
+          </div>
+        </section>
+
+        {/* FUTURE VISION */}
+        <section className="py-24 px-6 lg:px-12 relative z-20 border-t border-gray-100 bg-[#fcfbf8]">
+          <div className="container mx-auto max-w-5xl">
+            <div className="grid md:grid-cols-2 gap-8">
+              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="bg-white rounded-[2rem] p-10 border border-gray-100 shadow-sm relative overflow-hidden">
+                <div className="absolute top-6 right-6 bg-orange-100 text-orange-800 text-[10px] font-bold uppercase tracking-widest py-1 px-3 rounded-full">Coming Soon</div>
+                <h3 className="text-2xl font-bold mb-2">HouseReady Passport</h3>
+                <p className="text-gray-500 font-medium mb-8">Your property's history, in one place.</p>
+                <div className="space-y-4 border-l-2 border-gray-100 pl-6 ml-2">
+                  <div className="relative">
+                    <div className="absolute w-3 h-3 bg-teal-500 rounded-full -left-[31px] top-1"></div>
+                    <div className="text-xs font-bold text-gray-400">Aug 2026</div>
+                    <div className="font-bold text-gray-700">Move-In Ready</div>
+                  </div>
+                  <div className="relative opacity-50">
+                    <div className="absolute w-3 h-3 bg-gray-300 rounded-full -left-[31px] top-1"></div>
+                    <div className="text-xs font-bold text-gray-400">Dec 2026</div>
+                    <div className="font-bold text-gray-700">Plumbing Service</div>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="bg-[#1c1f22] text-white rounded-[2rem] p-10 shadow-antigravity relative overflow-hidden">
+                <div className="absolute top-6 right-6 bg-white/20 backdrop-blur text-white text-[10px] font-bold uppercase tracking-widest py-1 px-3 rounded-full">Coming Soon</div>
+                <h3 className="text-2xl font-bold mb-2">HouseReady Care</h3>
+                <p className="text-gray-400 font-medium mb-8">For owners who don't live near their property.</p>
+                <div className="flex flex-wrap gap-3">
+                  {['Periodic inspection', 'Cleaning', 'Maintenance', 'Repairs', 'Vacancy checks', 'Owner updates'].map(s => (
+                    <div key={s} className="px-4 py-2 rounded-xl bg-white/10 text-sm font-medium">{s}</div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
           </div>
         </section>
 
@@ -566,6 +665,21 @@ export default function HomePage() {
           </div>
         </div>
       </footer>
+      {/* MOBILE STICKY CTA */}
+      <div className="md:hidden fixed bottom-4 left-4 right-4 z-50">
+        <Link href="/planner">
+          <Button className="w-full bg-[#1c1f22] text-white hover:bg-gray-800 rounded-full h-14 font-bold shadow-antigravity text-lg">
+            Get My House Ready
+          </Button>
+        </Link>
+      </div>
+
+      {/* FLOATING WHATSAPP */}
+      <Link href="https://wa.me/919000000000" target="_blank" className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 hidden md:flex items-center justify-center w-14 h-14 bg-[#25D366] text-white rounded-full shadow-lg hover:scale-110 transition-transform">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+        </svg>
+      </Link>
     </div>
   );
 }
