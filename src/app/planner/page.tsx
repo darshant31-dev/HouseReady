@@ -162,9 +162,9 @@ function PlannerContent() {
             <Home className="h-6 w-6 text-teal-700" />
             <span className="hidden sm:inline">HouseReady</span>
           </Link>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-col sm:flex-row items-end sm:items-center gap-1 sm:gap-4">
             <div className="text-xs font-bold text-gray-400 uppercase tracking-widest">
-              {progress < 100 ? `Step ${Math.min(step, 6)} of 6` : 'Your Plan'}
+              {step < 7 ? `Step ${step} of 6` : 'Your Plan'}
             </div>
             <div className="w-24 h-2 bg-gray-200 rounded-full overflow-hidden hidden sm:block">
               <motion.div 
@@ -174,6 +174,14 @@ function PlannerContent() {
                 transition={{ duration: 0.5, ease: "easeOut" }}
               />
             </div>
+            {/* Mobile Dots */}
+            {step < 7 && (
+              <div className="flex gap-1 sm:hidden">
+                {[1, 2, 3, 4, 5, 6].map(s => (
+                  <div key={s} className={`w-1.5 h-1.5 rounded-full ${s <= step ? 'bg-teal-500' : 'bg-gray-200'}`}></div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </header>

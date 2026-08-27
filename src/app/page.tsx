@@ -92,8 +92,10 @@ export default function HomePage() {
         <div className="fixed inset-0 z-40 bg-white/95 backdrop-blur-xl pt-28 px-6 md:hidden flex flex-col gap-6 items-center">
           <Link href="#what-we-do" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-semibold">What We Do</Link>
           <Link href="#how-it-works" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-semibold">How It Works</Link>
-          <Link href="#packages" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-semibold">Packages</Link>
+          <Link href={`/planner?goal=${encodeURIComponent('Rent')}`} onClick={() => setMobileMenuOpen(false)} className="text-2xl font-semibold">For Renters</Link>
+          <Link href={`/planner?goal=${encodeURIComponent('Sell')}`} onClick={() => setMobileMenuOpen(false)} className="text-2xl font-semibold">For Owners</Link>
           <Link href="#guide" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-semibold">House Guide</Link>
+          <Link href="https://wa.me/919000000000" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-semibold text-teal-600">Contact via WhatsApp</Link>
           <Link href="/planner" onClick={() => setMobileMenuOpen(false)} className="mt-4">
              <Button className="bg-teal-700 text-white rounded-full px-8 h-12 text-lg shadow-glow">
                 Get My House Ready
@@ -137,12 +139,12 @@ export default function HomePage() {
                 </p>
               </motion.div>
               
-              <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1, delay: 0.2 }} className="hidden lg:block relative h-[70vh] w-full rounded-[3rem] overflow-hidden shadow-antigravity">
+              <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1, delay: 0.2 }} className="relative h-[40vh] lg:h-[70vh] w-full rounded-[2.5rem] lg:rounded-[3rem] overflow-hidden shadow-antigravity mt-8 lg:mt-0">
                 <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center"></div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-                <div className="absolute bottom-8 left-8 right-8 bg-white/20 backdrop-blur-xl border border-white/40 p-6 rounded-3xl text-white">
-                  <div className="font-bold tracking-widest text-xs uppercase mb-2 opacity-80">Recent Project</div>
-                  <div className="text-xl font-bold">3 BHK Move-In Ready • Wakad</div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                <div className="absolute bottom-6 left-6 right-6 lg:bottom-8 lg:left-8 lg:right-8 bg-white/20 backdrop-blur-xl border border-white/40 p-5 lg:p-6 rounded-2xl lg:rounded-3xl text-white">
+                  <div className="font-bold tracking-widest text-[10px] lg:text-xs uppercase mb-1 lg:mb-2 opacity-80">Recent Project</div>
+                  <div className="text-lg lg:text-xl font-bold">3 BHK Move-In Ready • Wakad</div>
                 </div>
               </motion.div>
             </div>
@@ -159,22 +161,22 @@ export default function HomePage() {
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="flex overflow-x-auto pb-8 -mx-6 px-6 snap-x snap-mandatory md:grid md:grid-cols-2 lg:grid-cols-4 md:overflow-visible md:pb-0 md:mx-0 md:px-0 gap-4 md:gap-6 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
               {destinations.map((dest, i) => (
-                <Link href={`/planner?goal=${encodeURIComponent(dest.title)}`} key={i}>
+                <Link href={`/planner?goal=${encodeURIComponent(dest.title)}`} key={i} className="min-w-[240px] md:min-w-0 snap-start">
                   <motion.div 
                     initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }}
                     variants={{
                       hidden: { opacity: 0, y: 30, scale: 0.95 },
                       visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, delay: i * 0.1, ease: "easeOut" } }
                     }}
-                    className={`group relative h-72 ${dest.color} rounded-[2rem] p-8 flex flex-col justify-between overflow-hidden shadow-sm hover:shadow-antigravity hover:-translate-y-2 transition-all duration-500 cursor-pointer border`}
+                    className={`group relative h-56 md:h-72 ${dest.color} rounded-[2rem] p-6 md:p-8 flex flex-col justify-between overflow-hidden shadow-sm hover:shadow-antigravity hover:-translate-y-2 transition-all duration-500 cursor-pointer border`}
                   >
-                    <div className="w-14 h-14 rounded-full bg-white/60 backdrop-blur-md flex items-center justify-center shadow-sm group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
+                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/60 backdrop-blur-md flex items-center justify-center shadow-sm group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
                       {dest.icon}
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold tracking-tight mb-3 group-hover:translate-x-2 transition-transform duration-500">{dest.title}</h3>
+                      <h3 className="text-xl md:text-2xl font-bold tracking-tight mb-2 md:mb-3 group-hover:translate-x-2 transition-transform duration-500">{dest.title}</h3>
                       <p className="text-sm font-medium opacity-80 leading-relaxed group-hover:opacity-100 transition-opacity duration-500">
                         {dest.desc}
                       </p>
@@ -467,17 +469,15 @@ export default function HomePage() {
               <p className="text-xl text-gray-500 font-medium">A completely managed process, from quote to handover.</p>
             </motion.div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
               {[
-                { step: "01", title: "Tell us what you need.", desc: "Use the planner to build your scope." },
-                { step: "02", title: "We confirm the scope.", desc: "An expert finalizes details with you." },
-                { step: "03", title: "You receive the final quote.", desc: "Transparent, upfront pricing." },
-                { step: "04", title: "Services are scheduled.", desc: "We coordinate our vetted partners." },
-                { step: "05", title: "Work is completed.", desc: "Follow progress on your dashboard." },
-                { step: "06", title: "HouseReady checks the job.", desc: "We verify the quality standard." },
-                { step: "07", title: "Your house is ready.", desc: "On time and hassle-free." }
+                { step: "01", title: "Tell us what's happening.", desc: "Use the planner to share your situation." },
+                { step: "02", title: "Get your plan.", desc: "We recommend what needs to be done." },
+                { step: "03", title: "Approve the quote.", desc: "Transparent, upfront pricing." },
+                { step: "04", title: "We coordinate.", desc: "Our team manages the vendors and timeline." },
+                { step: "05", title: "Your house is ready.", desc: "We check the quality before handover." }
               ].map((s, i) => (
-                <div key={i} className="p-6 rounded-[2rem] bg-white shadow-sm border border-gray-100 hover:shadow-md transition-all">
+                <div key={i} className="p-6 rounded-[2rem] bg-white shadow-sm border border-gray-100 hover:shadow-md transition-all flex flex-col md:text-center lg:text-left">
                   <div className="text-teal-600/30 font-black text-4xl mb-4">{s.step}</div>
                   <h4 className="font-bold text-lg mb-2 leading-tight">{s.title}</h4>
                   <p className="text-gray-500 text-sm font-medium">{s.desc}</p>
@@ -487,23 +487,45 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* SINGLE SERVICE OPTION */}
+        {/* ALTERNATIVE FLOWS */}
         <section className="py-24 px-6 lg:px-12 relative z-20">
-          <div className="container mx-auto max-w-4xl text-center">
-             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="bg-white rounded-[3rem] p-12 border border-gray-200 shadow-sm">
-                <h3 className="text-sm font-bold text-gray-400 mb-4 uppercase tracking-widest">I KNOW WHAT I NEED</h3>
-                <h2 className="text-3xl font-bold tracking-tight mb-6">Just want one or two services?</h2>
-                <div className="flex flex-wrap justify-center gap-3 mb-10 max-w-2xl mx-auto">
-                  {['Cleaning', 'Painting', 'Pest Control', 'Plumbing', 'Electrical', 'Carpentry', 'Moving', 'Installation', 'Other'].map(s => (
-                    <div key={s} className="px-5 py-2.5 rounded-full bg-gray-50 border border-gray-200 font-medium text-gray-600">{s}</div>
-                  ))}
-                </div>
-                <Link href="/planner?goal=Single">
-                  <Button variant="outline" className="rounded-full px-8 h-14 font-bold border-gray-300 text-gray-700 hover:bg-gray-50">
-                    Get An Estimate <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button>
-                </Link>
-             </motion.div>
+          <div className="container mx-auto max-w-5xl">
+             <div className="grid md:grid-cols-2 gap-8">
+               
+               {/* NOT SURE WHAT YOU NEED */}
+               <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="bg-[#1c1f22] text-white rounded-[3rem] p-10 md:p-12 border border-gray-800 shadow-antigravity text-center flex flex-col justify-between">
+                  <div>
+                    <h2 className="text-3xl font-bold tracking-tight mb-4">Not sure what you need?</h2>
+                    <h3 className="text-lg font-medium text-gray-400 mb-8 uppercase tracking-widest">THAT'S OK.</h3>
+                    <p className="text-gray-300 font-medium mb-8 leading-relaxed">
+                      Tell us what is happening (e.g. "I'm moving into a new flat"). We'll help figure out the rest.
+                    </p>
+                  </div>
+                  <Link href="/planner">
+                    <Button className="w-full rounded-full bg-white text-[#1c1f22] hover:bg-gray-100 h-14 font-bold">
+                      Help Me Figure It Out <ArrowRight className="w-4 h-4 ml-2" />
+                    </Button>
+                  </Link>
+               </motion.div>
+
+               {/* SINGLE SERVICE OPTION */}
+               <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, delay: 0.1 }} variants={fadeUp} className="bg-white rounded-[3rem] p-10 md:p-12 border border-gray-200 shadow-sm text-center flex flex-col justify-between">
+                  <div>
+                    <h2 className="text-3xl font-bold tracking-tight mb-4 text-[#1c1f22]">Just need one thing?</h2>
+                    <h3 className="text-sm font-bold text-gray-400 mb-8 uppercase tracking-widest">I KNOW WHAT I NEED</h3>
+                    <div className="flex flex-wrap justify-center gap-2 mb-8">
+                      {['Cleaning', 'Painting', 'Pest Control', 'Plumbing', 'Electrical', 'Carpentry', 'Moving', 'Other'].map(s => (
+                        <div key={s} className="px-4 py-2 rounded-full bg-gray-50 border border-gray-200 text-xs font-medium text-gray-600">{s}</div>
+                      ))}
+                    </div>
+                  </div>
+                  <Link href="/planner?goal=Single">
+                    <Button variant="outline" className="w-full rounded-full border-gray-300 text-gray-700 hover:bg-gray-50 h-14 font-bold">
+                      Get An Estimate <ArrowRight className="w-4 h-4 ml-2" />
+                    </Button>
+                  </Link>
+               </motion.div>
+             </div>
           </div>
         </section>
 
@@ -628,20 +650,21 @@ export default function HomePage() {
             </div>
             
             <div>
-              <h4 className="font-bold mb-6 text-gray-900">Destinations</h4>
+              <h4 className="font-bold mb-6 text-gray-900">Explore</h4>
               <ul className="space-y-4 text-sm font-medium text-gray-500">
-                {['Move In', 'Move Out', 'Rent', 'Sell', 'Handover', 'Refresh'].map(link => (
-                  <li key={link}><Link href={`/planner?goal=${encodeURIComponent(link)}`} className="hover:text-teal-700 transition-colors">{link}</Link></li>
-                ))}
+                <li><Link href="#what-we-do" className="hover:text-teal-700 transition-colors">What We Do</Link></li>
+                <li><Link href="#how-it-works" className="hover:text-teal-700 transition-colors">How It Works</Link></li>
+                <li><Link href={`/planner?goal=${encodeURIComponent('Rent')}`} className="hover:text-teal-700 transition-colors">For Renters</Link></li>
+                <li><Link href={`/planner?goal=${encodeURIComponent('Sell')}`} className="hover:text-teal-700 transition-colors">For Owners</Link></li>
               </ul>
             </div>
             
             <div>
-              <h4 className="font-bold mb-6 text-gray-900">Company</h4>
+              <h4 className="font-bold mb-6 text-gray-900">Contact</h4>
               <ul className="space-y-4 text-sm font-medium text-gray-500">
-                <li><Link href="#what-we-do" className="hover:text-teal-700 transition-colors">What We Do</Link></li>
-                <li><Link href="#packages" className="hover:text-teal-700 transition-colors">Packages</Link></li>
-                <li><Link href="#guide" className="hover:text-teal-700 transition-colors">House Guide</Link></li>
+                <li><Link href="https://wa.me/919000000000" target="_blank" className="hover:text-teal-700 transition-colors">WhatsApp</Link></li>
+                <li><Link href="mailto:hello@houseready.in" className="hover:text-teal-700 transition-colors">Email</Link></li>
+                <li><span className="text-gray-400">Pune, India</span></li>
               </ul>
             </div>
           </div>
@@ -665,7 +688,7 @@ export default function HomePage() {
       </div>
 
       {/* FLOATING WHATSAPP */}
-      <Link href="https://wa.me/919000000000" target="_blank" className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 hidden md:flex items-center justify-center w-14 h-14 bg-[#25D366] text-white rounded-full shadow-lg hover:scale-110 transition-transform">
+      <Link href="https://wa.me/919000000000?text=Hi%20HouseReady,%20I%20need%20help%20getting%20my%20house%20ready." target="_blank" className="fixed bottom-24 right-4 md:bottom-8 md:right-8 z-50 flex items-center justify-center w-14 h-14 bg-[#25D366] text-white rounded-full shadow-lg hover:scale-110 transition-transform">
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" viewBox="0 0 16 16">
           <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
         </svg>
