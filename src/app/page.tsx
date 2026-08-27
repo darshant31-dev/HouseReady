@@ -151,6 +151,56 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* DIFFERENTIATION / POSITIONING */}
+        <section className="py-24 px-6 lg:px-12 relative z-20 bg-teal-900 text-white rounded-[3rem] mx-4 sm:mx-6 lg:mx-12 overflow-hidden shadow-antigravity">
+          <div className="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=2069&auto=format&fit=crop')] bg-cover bg-center mix-blend-overlay"></div>
+          <div className="container mx-auto max-w-5xl relative z-10 text-center">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+              <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-16 leading-tight">
+                Getting a house ready <br className="hidden sm:block" />
+                <span className="text-teal-300">is a project.</span>
+              </h2>
+            </motion.div>
+            
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, delay: 0.1 }} variants={fadeUp} className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12 mb-16">
+              <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 w-full md:w-1/3">
+                <div className="text-sm font-medium text-teal-100 flex flex-col gap-3 text-left">
+                  <div className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-teal-400"></div> Cleaning</div>
+                  <div className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-teal-400"></div> Painting</div>
+                  <div className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-teal-400"></div> Plumbing</div>
+                  <div className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-teal-400"></div> Electrical</div>
+                  <div className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-teal-400"></div> Pest Control</div>
+                  <div className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-teal-400"></div> Repairs</div>
+                </div>
+              </div>
+              <div className="text-teal-400 animate-pulse hidden md:block">
+                <ArrowRight className="w-8 h-8" />
+              </div>
+              <div className="text-teal-400 animate-pulse md:hidden">
+                <ArrowRight className="w-6 h-6 rotate-90" />
+              </div>
+              <div className="bg-teal-800 rounded-2xl p-8 border border-teal-700 w-full md:w-1/3 text-center shadow-inner">
+                <div className="w-16 h-16 bg-teal-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                </div>
+                <div className="font-bold text-xl text-white">You</div>
+                <div className="text-sm text-teal-300 mt-2">Managing it all</div>
+              </div>
+            </motion.div>
+
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, delay: 0.2 }} variants={fadeUp} className="max-w-2xl mx-auto">
+              <h3 className="text-2xl sm:text-4xl font-bold mb-6">One House. One Coordinated Plan.</h3>
+              <p className="text-lg sm:text-xl text-teal-100/80 leading-relaxed mb-8">
+                You shouldn't have to find, call, schedule, and follow up with five different vendors. 
+              </p>
+              <div className="p-6 bg-teal-950/50 rounded-2xl border border-teal-800/50">
+                <p className="text-lg font-bold text-white mb-2">Tell us what needs to be ready.</p>
+                <p className="text-teal-300">We'll figure out exactly what needs to happen.</p>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
         {/* READY FOR WHAT? (DESTINATIONS) */}
         <section id="what-we-do" className="py-24 px-6 lg:px-12 relative z-20">
           <div className="container mx-auto">
