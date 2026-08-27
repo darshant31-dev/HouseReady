@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Image from "next/image";
 
 const stories = [
   {
@@ -102,11 +103,13 @@ export function TransformationStories() {
 
             {/* Outcome Image */}
             <div className="relative h-[400px] lg:h-[500px] w-full rounded-[2rem] overflow-hidden shadow-md group">
-              <div 
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                style={{ backgroundImage: `url('${stories[activeStory].image}')` }}
+              <Image 
+                src={stories[activeStory].image}
+                alt={`HouseReady ${stories[activeStory].title} transformation`}
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div>
               <div className="absolute bottom-8 left-8 right-8">
                 <div className="inline-block px-3 py-1 bg-white/20 backdrop-blur-md border border-white/30 rounded-full text-white text-xs font-bold uppercase tracking-widest mb-3">
                   The Outcome

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { ArrowRight, MapPin, Menu, X, Home, Check, CheckCircle2, Sparkles, Wrench, PackageOpen, PaintRoller, Camera } from "lucide-react";
@@ -140,7 +141,7 @@ export default function HomePage() {
               </motion.div>
               
               <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1, delay: 0.2 }} className="relative h-[40vh] lg:h-[70vh] w-full rounded-[2.5rem] lg:rounded-[3rem] overflow-hidden shadow-antigravity mt-8 lg:mt-0">
-                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center"></div>
+                <Image src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=2070&auto=format&fit=crop" alt="HouseReady recent project in Pune - fully managed move-in ready apartment" fill className="object-cover" priority />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                 <div className="absolute bottom-6 left-6 right-6 lg:bottom-8 lg:left-8 lg:right-8 bg-white/20 backdrop-blur-xl border border-white/40 p-5 lg:p-6 rounded-2xl lg:rounded-3xl text-white">
                   <div className="font-bold tracking-widest text-[10px] lg:text-xs uppercase mb-1 lg:mb-2 opacity-80">Recent Project</div>
@@ -153,7 +154,7 @@ export default function HomePage() {
 
         {/* DIFFERENTIATION / POSITIONING */}
         <section className="py-24 px-6 lg:px-12 relative z-20 bg-teal-900 text-white rounded-[3rem] mx-4 sm:mx-6 lg:mx-12 overflow-hidden shadow-antigravity">
-          <div className="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=2069&auto=format&fit=crop')] bg-cover bg-center mix-blend-overlay"></div>
+          <Image src="https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=2069&auto=format&fit=crop" alt="HouseReady project planning" fill className="object-cover opacity-10 mix-blend-overlay" />
           <div className="container mx-auto max-w-5xl relative z-10 text-center">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
               <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-16 leading-tight">
@@ -316,7 +317,7 @@ export default function HomePage() {
         <section id="packages" className="py-32 px-6 lg:px-12 relative z-20">
           <div className="container mx-auto">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Standard Ready Packages</h2>
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Comprehensive Home Readiness Packages</h2>
               <p className="text-xl text-gray-500 font-medium">Popular combinations that guarantee a flawless handover.</p>
             </motion.div>
 
@@ -397,7 +398,7 @@ export default function HomePage() {
             <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
               {/* Traditional */}
               <div className="bg-gray-50 rounded-[3rem] p-10 border border-gray-200">
-                <h3 className="text-xl font-bold text-gray-400 mb-8 uppercase tracking-widest">The Traditional Way</h3>
+                <div className="text-xl font-bold text-gray-400 mb-8 uppercase tracking-widest">The Traditional Way</div>
                 <ul className="space-y-6">
                   {["Find a cleaner", "Find a painter", "Find a mover", "Call a plumber", "Coordinate timing", "Negotiate prices", "Check quality"].map((item, i) => (
                     <li key={i} className="flex items-center gap-4 text-gray-500 font-medium strike-through">
@@ -411,7 +412,7 @@ export default function HomePage() {
               {/* HouseReady */}
               <div className="bg-teal-900 text-white rounded-[3rem] p-10 shadow-antigravity relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-teal-500/20 blur-[80px] rounded-full"></div>
-                <h3 className="text-xl font-bold text-teal-200 mb-8 uppercase tracking-widest relative z-10">HouseReady</h3>
+                <div className="text-xl font-bold text-teal-200 mb-8 uppercase tracking-widest relative z-10">HouseReady</div>
                 <p className="text-2xl font-bold mb-8 relative z-10">Tell us what needs to be ready. We handle the rest.</p>
                 <ul className="space-y-6 relative z-10">
                   {["Plan", "Coordinate", "Execute", "Check", "Ready"].map((item, i) => (
@@ -483,7 +484,7 @@ export default function HomePage() {
               <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="bg-white rounded-[3rem] p-8 shadow-antigravity border border-gray-100 max-w-md mx-auto w-full">
                 <div className="flex justify-between items-center mb-8 border-b border-gray-100 pb-6">
                   <div>
-                    <h4 className="font-bold text-xl">Wakad • 2 BHK</h4>
+                    <div className="font-bold text-xl">Wakad • 2 BHK</div>
                     <p className="text-sm text-gray-400 font-medium">Move-In Ready Plan</p>
                   </div>
                   <div className="w-12 h-12 bg-teal-50 rounded-full flex items-center justify-center text-teal-600 font-bold">
@@ -546,7 +547,7 @@ export default function HomePage() {
                <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="bg-[#1c1f22] text-white rounded-[3rem] p-10 md:p-12 border border-gray-800 shadow-antigravity text-center flex flex-col justify-between">
                   <div>
                     <h2 className="text-3xl font-bold tracking-tight mb-4">Not sure what you need?</h2>
-                    <h3 className="text-lg font-medium text-gray-400 mb-8 uppercase tracking-widest">THAT'S OK.</h3>
+                    <div className="text-lg font-medium text-gray-400 mb-8 uppercase tracking-widest">THAT'S OK.</div>
                     <p className="text-gray-300 font-medium mb-8 leading-relaxed">
                       Tell us what is happening (e.g. "I'm moving into a new flat"). We'll help figure out the rest.
                     </p>
@@ -562,7 +563,7 @@ export default function HomePage() {
                <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, delay: 0.1 }} variants={fadeUp} className="bg-white rounded-[3rem] p-10 md:p-12 border border-gray-200 shadow-sm text-center flex flex-col justify-between">
                   <div>
                     <h2 className="text-3xl font-bold tracking-tight mb-4 text-[#1c1f22]">Just need one thing?</h2>
-                    <h3 className="text-sm font-bold text-gray-400 mb-8 uppercase tracking-widest">I KNOW WHAT I NEED</h3>
+                    <div className="text-sm font-bold text-gray-400 mb-8 uppercase tracking-widest">I KNOW WHAT I NEED</div>
                     <div className="flex flex-wrap justify-center gap-2 mb-8">
                       {['Cleaning', 'Painting', 'Pest Control', 'Plumbing', 'Electrical', 'Carpentry', 'Moving', 'Other'].map(s => (
                         <div key={s} className="px-4 py-2 rounded-full bg-gray-50 border border-gray-200 text-xs font-medium text-gray-600">{s}</div>
@@ -700,7 +701,7 @@ export default function HomePage() {
             </div>
             
             <div>
-              <h4 className="font-bold mb-6 text-gray-900">Explore</h4>
+              <div className="font-bold mb-6 text-gray-900">Explore</div>
               <ul className="space-y-4 text-sm font-medium text-gray-500">
                 <li><Link href="#what-we-do" className="hover:text-teal-700 transition-colors">What We Do</Link></li>
                 <li><Link href="#how-it-works" className="hover:text-teal-700 transition-colors">How It Works</Link></li>
@@ -710,7 +711,7 @@ export default function HomePage() {
             </div>
             
             <div>
-              <h4 className="font-bold mb-6 text-gray-900">Contact</h4>
+              <div className="font-bold mb-6 text-gray-900">Contact</div>
               <ul className="space-y-4 text-sm font-medium text-gray-500">
                 <li><Link href="https://wa.me/919000000000" target="_blank" className="hover:text-teal-700 transition-colors">WhatsApp</Link></li>
                 <li><Link href="mailto:hello@houseready.in" className="hover:text-teal-700 transition-colors">Email</Link></li>
