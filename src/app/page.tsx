@@ -93,6 +93,7 @@ export default function HomePage() {
           <Link href="#what-we-do" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-semibold">What We Do</Link>
           <Link href="#how-it-works" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-semibold">How It Works</Link>
           <Link href="#packages" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-semibold">Packages</Link>
+          <Link href="#guide" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-semibold">House Guide</Link>
           <Link href="/planner" onClick={() => setMobileMenuOpen(false)} className="mt-4">
              <Button className="bg-teal-700 text-white rounded-full px-8 h-12 text-lg shadow-glow">
                 Get My House Ready
@@ -459,7 +460,7 @@ export default function HomePage() {
         </section>
 
         {/* WHAT HAPPENS AFTER I BOOK? */}
-        <section className="py-24 px-6 lg:px-12 relative z-20 bg-gray-50 border-t border-gray-200">
+        <section id="how-it-works" className="py-24 px-6 lg:px-12 relative z-20 bg-gray-50 border-t border-gray-200">
           <div className="container mx-auto max-w-5xl">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="text-center mb-16">
               <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">What happens after you book?</h2>
@@ -570,7 +571,7 @@ export default function HomePage() {
         </section>
 
         {/* FAQ */}
-        <section className="py-24 px-6 lg:px-12 relative z-20 bg-white">
+        <section id="guide" className="py-24 px-6 lg:px-12 relative z-20 bg-white">
           <div className="container mx-auto max-w-3xl">
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-12 text-center">Frequently Asked Questions</h2>
             <div className="space-y-6">
@@ -640,7 +641,7 @@ export default function HomePage() {
               <ul className="space-y-4 text-sm font-medium text-gray-500">
                 <li><Link href="#what-we-do" className="hover:text-teal-700 transition-colors">What We Do</Link></li>
                 <li><Link href="#packages" className="hover:text-teal-700 transition-colors">Packages</Link></li>
-                <li><Link href="#" className="hover:text-teal-700 transition-colors">House Guide</Link></li>
+                <li><Link href="#guide" className="hover:text-teal-700 transition-colors">House Guide</Link></li>
               </ul>
             </div>
           </div>

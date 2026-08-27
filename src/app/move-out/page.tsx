@@ -15,7 +15,7 @@ export default function MoveOutPage() {
             <Home className="h-6 w-6 text-teal-700" />
             HouseReady
           </Link>
-          <Link href="/pricing">
+          <Link href="/planner">
             <Button className="bg-[#1c1f22] text-white hover:bg-[#1c1f22]/90">
               Plan My Move
             </Button>
@@ -112,9 +112,11 @@ export default function MoveOutPage() {
                   </div>
                 </CardContent>
                 <CardFooter>
-                  <Button className="w-full bg-teal-600 hover:bg-teal-700 text-white h-12 text-lg">
-                    Submit & Pay ₹499
-                  </Button>
+                  <Link href="/planner" className="w-full">
+                    <Button className="w-full bg-teal-600 hover:bg-teal-700 text-white h-12 text-lg">
+                      Start My Move-Out Plan
+                    </Button>
+                  </Link>
                 </CardFooter>
               </Card>
               <p className="text-center text-xs text-gray-500 mt-4">*Sample prototype pricing only.</p>

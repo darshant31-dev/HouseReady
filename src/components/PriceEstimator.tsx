@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Calculator, ArrowRight, Building, Hammer } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export function PriceEstimator() {
   const [size, setSize] = useState("2 BHK");
@@ -110,9 +111,11 @@ export function PriceEstimator() {
           Indicative estimate. Final quote depends on exact scope and partner availability.
         </p>
 
-        <Button className="w-full bg-[#1c1f22] text-white hover:bg-gray-800 rounded-full h-14 font-bold shadow-md">
-          Get a Confirmed Quote <ArrowRight className="ml-2 w-4 h-4" />
-        </Button>
+        <Link href="/planner" className="w-full">
+          <Button className="w-full bg-[#1c1f22] text-white hover:bg-gray-800 rounded-full h-14 font-bold shadow-md">
+            Get a Confirmed Quote <ArrowRight className="ml-2 w-4 h-4" />
+          </Button>
+        </Link>
       </div>
 
     </div>
